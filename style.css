@@ -1,0 +1,24 @@
+html, body {
+    background-color: #0e131f;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.book-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    width: 1000px;
+    height: 300px;
+    border: 1px solid red;
+}
+
+.book-display > div {
+    width: 200px;
+    border: 1px solid red;
+}
