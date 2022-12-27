@@ -11,7 +11,7 @@ addBookBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", () => {
     let title = document.getElementById("title").value;
     let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value;
+    let pages = document.getElementById("pages").value + "pages";
     let read = document.querySelector('input[name="read"]:checked').value;
 
     event.preventDefault();
@@ -36,35 +36,15 @@ function Book(title, author, pages, read) {
 };
 
 function addBookToLibrary(title, author, pages, read) {
-
-    // let title = document.getElementById("title").value;
-    // let author = document.getElementById("author").value;
-    // let pages = document.getElementById("pages").value;
-    // let read = document.getElementById("read").value;
-
-    // console.log(title, author, pages, read)
-
-    // title = prompt("Give title: ");
-    // author = prompt("Give author: ");
-    // pages = parseInt(prompt("Give page numbers: "));
-
-    // keepGoing = true;
-    // while (keepGoing) {
-    //     if (isNaN(pages) == true) {
-    //         pages = parseInt(prompt("Number of pages must be a number: "));
-    //     } else {
-    //         keepGoing = false;
-    //     }
-    // }
-    
-    // read = prompt("Have you read it?");
-
     const book = new Book(title, author, pages, read);
 
     myLibrary.push(book);
 
     let card = document.createElement("div");
+    let button = document.createElement("button");
+    button.innerHTML = "Remove";
     bookDisplay.appendChild(card);
+    card.appendChild(button);
 
     for (item in book) {
         let div = document.createElement("div");
@@ -72,7 +52,3 @@ function addBookToLibrary(title, author, pages, read) {
         div.innerHTML += book[item];
     }
 };
-
-// addBookToLibrary();
-// console.log(myLibrary);
-
