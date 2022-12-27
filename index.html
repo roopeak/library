@@ -9,7 +9,29 @@
 </head>
 <body>
     <h1>Library</h1>
+    <button class="add-book">Add book</button>
     <div class="book-display"></div>
+    <form class="add-book-form">
+        <label for="title">Title of the book:</label>
+        <input type="text" id="title">
+
+        <label for="author">Author of the book:</label>
+        <input type="text" id="author">
+
+        <label for="pages">Number of pages:</label>
+        <input type="number" id="pages">
+
+        <label for="read">Have you read it?</label>
+
+        <div class="radio-buttons">
+            <input type="radio" id="read" name="read" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="read" name="read" value="no">
+            <label for="no">No</label>
+        </div>
+
+        <button class="submit-button">Add a book</button>
+    </form>
     <script src="script.js"></script>
 
 </body>
