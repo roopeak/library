@@ -23,7 +23,8 @@ submitBtn.addEventListener("click", () => {
     document.getElementById("title").value = "";  
     document.getElementById("author").value = "";
     document.getElementById("pages").value = "";
-    document.getElementById("read").value = "";  
+    // If enabled, doesn't add value after removed card.
+    // document.getElementById("read").value = "";  
 })
 
 let myLibrary = [];
@@ -58,11 +59,25 @@ function addBookToLibrary(title, author, pages, read) {
     console.log(cards.length);
 
     removeBtn.addEventListener("click", function() {
-        console.log("yes");
+        removeBtn.parentElement.remove();
     } );
 
     readBtn.addEventListener("click", function() {
-        console.log("yes");
+        if (book.read == "Not read") {
+            book.read = "Read";
+        } else {
+            book.read = "Not read"
+        }
+
+        readBtn.parentElement.innerHTML = "";
+        for (item in book) {
+            let div = document.createElement("div");
+            card.appendChild(div);
+            div.innerHTML += book[item];
+        }
+
+        card.appendChild(removeBtn);
+        card.appendChild(readBtn);
     });
 
     for (item in book) {
@@ -71,8 +86,6 @@ function addBookToLibrary(title, author, pages, read) {
         div.innerHTML += book[item];
     }
 
-    // card.innerHTML += removeBtn;
-    // card.innerHTML += readBtn;
     card.appendChild(removeBtn);
     card.appendChild(readBtn);
 };
