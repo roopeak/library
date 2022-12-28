@@ -22,9 +22,7 @@ submitBtn.addEventListener("click", () => {
 
     document.getElementById("title").value = "";  
     document.getElementById("author").value = "";
-    document.getElementById("pages").value = "";
-    // If enabled, doesn't add value after removed card.
-    // document.getElementById("read").value = "";  
+    document.getElementById("pages").value = ""; 
 })
 
 let myLibrary = [];
@@ -53,7 +51,6 @@ function addBookToLibrary(title, author, pages, read) {
     readBtn.innerHTML = "Change read status";
 
     bookDisplay.appendChild(card);
-
 
     let cards = document.getElementsByClassName("book-card");
     console.log(cards.length);
