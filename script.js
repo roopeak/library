@@ -9,9 +9,9 @@ addBookBtn.addEventListener("click", () => {
 });
 
 submitBtn.addEventListener("click", () => {
-    let title = document.getElementById("title").value;
+    let title = '"' + document.getElementById("title").value + '"';
     let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value + "pages";
+    let pages = document.getElementById("pages").value + " pages";
     let read = document.querySelector('input[name="read"]:checked').value;
 
     event.preventDefault();
@@ -41,14 +41,39 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book);
 
     let card = document.createElement("div");
-    let button = document.createElement("button");
-    button.innerHTML = "Remove";
+    let removeBtn = document.createElement("button");
+    let readBtn = document.createElement("button");
+
+    card.classList.add("book-card");
+    removeBtn.classList.add("card-button");
+    readBtn.classList.add("card-button");
+
+    removeBtn.innerHTML = "Remove";
+    readBtn.innerHTML = "Change read status";
+
     bookDisplay.appendChild(card);
-    card.appendChild(button);
+
+
+    let cards = document.getElementsByClassName("book-card");
+    console.log(cards.length);
+
+    removeBtn.addEventListener("click", function() {
+        console.log("yes");
+    } );
+
+    readBtn.addEventListener("click", function() {
+        console.log("yes");
+    });
 
     for (item in book) {
         let div = document.createElement("div");
         card.appendChild(div);
         div.innerHTML += book[item];
     }
+
+    // card.innerHTML += removeBtn;
+    // card.innerHTML += readBtn;
+    card.appendChild(removeBtn);
+    card.appendChild(readBtn);
 };
+

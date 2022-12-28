@@ -24,13 +24,14 @@ h1 {
     padding: 50px;
 }
 
-.book-display > div {
+/* Book card styling */
+/* .book-display > div {
     text-align: center;
     width: 200px;
     height: 200px;
     padding: 30px;
     background-color: #475569;
-}
+} */
 
 .add-book-button-container {
     text-align: center;
@@ -59,4 +60,15 @@ h1 {
 .radio-buttons {
     display: flex;
     flex-direction: row;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    padding: 30px;
+    background-color: #475569;
 }
