@@ -93,3 +93,9 @@ h1 {
     background-color: #475569;
     border-radius: 10px;
 }
+
+.book-card > button {
+    height:50px;
+    width: 200px;
+    margin-top: 20px;
+}
