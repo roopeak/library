@@ -1,4 +1,16 @@
+const dialog = document.querySelector('dialog');
 const booksContainer = document.querySelector('.books-container');
+const newBookBtn = document.querySelector('.new-book-btn');
+const cancelNewBookButton = document.querySelector('dialog button');
+const submitBook = document.getElementById('submit-book');
+
+newBookBtn.addEventListener('click', () => {
+	dialog.showModal();
+});
+
+cancelNewBookButton.addEventListener('click', () => {
+	dialog.close();
+})
 
 const myLibrary = [
 	{

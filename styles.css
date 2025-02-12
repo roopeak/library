@@ -2,6 +2,21 @@ body {
 	text-align: center;
 }
 
+header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.new-book-btn {
+	background: none;
+	border: none;
+	height: 50px;
+	width: 200px;
+	background-color: beige;
+}
+
 .books-container {
   display: flex;
 	flex-direction: row;
