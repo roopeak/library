@@ -2,11 +2,35 @@ const dialog = document.querySelector('dialog');
 const booksContainer = document.querySelector('.books-container');
 const newBookBtn = document.querySelector('.new-book-btn');
 const cancelNewBookButton = document.querySelector('dialog button');
-const submitBook = document.getElementById('submit-book');
+const submitBookBtn = document.getElementById('submit-book');
+
+const newBookTitle = document.getElementById('title');
+const newBookAuthor = document.getElementById('author');
+const newBookPages = document.getElementById('pages');
+const newBookRead = document.getElementById('read-radio')
+const newBookNotRead = document.getElementById('notread-radio');
 
 newBookBtn.addEventListener('click', () => {
 	dialog.showModal();
 });
+
+submitBookBtn.addEventListener('click', () => {
+	const title = newBookTitle.value;
+	const author = newBookAuthor.value;
+	const pages = newBookPages.value;
+	let read;
+
+	if (newBookRead.checked) {
+		console.log('A new book is read')
+		read = 'Read';
+	} else {
+		console.log('A new book is not read')
+		read = 'Not read';
+	}
+
+	addBookToLibrary(title, author, pages, read);
+	event.preventDefault();
+})
 
 cancelNewBookButton.addEventListener('click', () => {
 	dialog.close();
@@ -17,19 +41,19 @@ const myLibrary = [
 		title: 'The Hobbit',
 		author: 'J.R.R. Tolkien',
 		pages: 320,
-		read: 'read'
+		read: 'Read'
 	},
 	{
 		title: '1984',
 		author: 'George Orwell',
 		pages: 328,
-		read: 'not read'
+		read: 'Not read'
 	},
 	{
 		title: 'Old Man and the Sea',
 		author: 'Ernest Hemingway',
 		pages: 112,
-		read: 'read'
+		read: 'Read'
 	}
 ];
 
@@ -41,6 +65,8 @@ function Book(title, author, pages, read) {
 };
 
 function addBookToLibrary(title, author, pages, read) {
+	console.log(title, author, pages, read)
+
 	const book = new Book(title, author, pages, read);
 	myLibrary.push(book);
 	generateCards();
@@ -67,5 +93,3 @@ function generateCards() {
 		bookRead.textContent += myLibrary[i].read;
 	}
 }
-
-generateCards();
