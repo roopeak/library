@@ -14,22 +14,24 @@ newBookBtn.addEventListener('click', () => {
 	dialog.showModal();
 });
 
-submitBookBtn.addEventListener('click', () => {
+submitBookBtn.addEventListener('click', (event) => {
 	const title = newBookTitle.value;
 	const author = newBookAuthor.value;
 	const pages = newBookPages.value;
 	let read;
 
-	if (newBookRead.checked) {
-		console.log('A new book is read')
-		read = 'Read';
-	} else {
-		console.log('A new book is not read')
-		read = 'Not read';
+	if (title != '' && author != '' && pages != '') {
+		if (newBookRead.checked) {
+			read = 'Read';
+		} else {
+			read = 'Not read';
+		}
+		
+		addBookToLibrary(title, author, pages, read);
+		clearForm();
+		event.preventDefault();
+		dialog.close();
 	}
-
-	addBookToLibrary(title, author, pages, read);
-	event.preventDefault();
 })
 
 cancelNewBookButton.addEventListener('click', () => {
@@ -65,8 +67,6 @@ function Book(title, author, pages, read) {
 };
 
 function addBookToLibrary(title, author, pages, read) {
-	console.log(title, author, pages, read)
-
 	const book = new Book(title, author, pages, read);
 	myLibrary.push(book);
 	generateCards();
@@ -92,4 +92,12 @@ function generateCards() {
 		bookPages.textContent += myLibrary[i].pages;
 		bookRead.textContent += myLibrary[i].read;
 	}
+}
+
+function clearForm() {
+	newBookTitle.value = '';
+	newBookAuthor.value = '';
+	newBookPages.value = '';
+	newBookRead.value = '';
+	newBookNotRead.value = ''; 
 }
