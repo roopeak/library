@@ -57,7 +57,43 @@ const myLibrary = [
 		author: 'Ernest Hemingway',
 		pages: 112,
 		read: 'Read'
-	}
+	},
+	{
+		title: 'The Hobbit',
+		author: 'J.R.R. Tolkien',
+		pages: 320,
+		read: 'Read'
+	},
+	{
+		title: '1984',
+		author: 'George Orwell',
+		pages: 328,
+		read: 'Not read'
+	},
+	{
+		title: 'Old Man and the Sea',
+		author: 'Ernest Hemingway',
+		pages: 112,
+		read: 'Read'
+	},
+	{
+		title: 'The Hobbit',
+		author: 'J.R.R. Tolkien',
+		pages: 320,
+		read: 'Read'
+	},
+	{
+		title: '1984',
+		author: 'George Orwell',
+		pages: 328,
+		read: 'Not read'
+	},
+	{
+		title: 'Old Man and the Sea',
+		author: 'Ernest Hemingway',
+		pages: 112,
+		read: 'Read'
+	},
 ];
 
 // Book constructor
@@ -118,7 +154,6 @@ function generateCards() {
 			toggleReadStatus(i);
 		})
 	}
-	console.log(myLibrary);
 }
 
 // Removes a book
