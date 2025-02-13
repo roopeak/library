@@ -7,7 +7,34 @@
     <title>Library</title>
 </head>
 <body>
-    <h1>Library</h1>
+    <header>
+			<h1>Library</h1>
+			<button class="new-book-btn">New book</button>
+    </header>
+		<dialog>
+			<form>
+				<div class="title-row">
+					<input type="text" id="title" name="title" placeholder="Book title" required>
+				</div>
+				<div class="author-row">
+					<input type="text" id="author" name="author" placeholder="Book author" required>
+				</div>
+				<div class="pages-row">
+					<input type="text" id="pages" name="pages" placeholder="Number of pages" required>
+				</div>
+				<div class="read-row">
+					<p>Have you read the book?</p>
+					<input type="radio" name="readornot" id="read-radio" value="read">
+					<label for="read">Read</label>
+					<input type="radio" name="readornot" id="notread-radio" value="notreadasd">
+					<label for="not-read">Not read</label>
+				</div>
+				<div class="submit-row">
+					<input type="submit" value="Add a book" id="submit-book">
+				</div>
+			</form>
+			<button autofocus>Cancel</button>
+		</dialog>
     <div class="books-container"></div>
     <script src="scripts.js"></script>
 </body>
