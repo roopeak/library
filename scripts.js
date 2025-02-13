@@ -10,8 +10,6 @@ const newBookPages = document.getElementById('pages');
 const newBookRead = document.getElementById('read-radio')
 const newBookNotRead = document.getElementById('notread-radio');
 
-let bookCardsGenerated = false;
-
 // Event listeners to the new book form
 newBookBtn.addEventListener('click', () => {
 	dialog.showModal();
@@ -79,15 +77,13 @@ function addBookToLibrary(title, author, pages, read) {
 
 // Generates book cards
 function generateCards() {
-	for (let i = 0; i < myLibrary.length; i++) {
-		if (bookCardsGenerated === true) {
-			i = myLibrary.length - 1;
-		}
+	booksContainer.innerHTML = '';
 
+	for (let i = 0; i < myLibrary.length; i++) {
 		const bookCard = document.createElement('div');
-		bookCard.dataset.index = i;
 		bookCard.classList.add('book-card');
 		booksContainer.appendChild(bookCard);
+
 		const bookTitle = document.createElement('h3');
 		const bookAuthor = document.createElement('p');
 		const bookPages = document.createElement('p');
@@ -105,9 +101,18 @@ function generateCards() {
 		bookPages.textContent += myLibrary[i].pages;
 		bookRead.textContent += myLibrary[i].read;
 		removeBook.textContent = 'Remove book';
+
+		// Add event listener to removeBook button
+		removeBook.addEventListener('click', () => {
+			removeBookFromLibrary(i);
+		})
 	}
-	
-	bookCardsGenerated = true;
+}
+
+// Removes a book
+function removeBookFromLibrary(index) {
+	myLibrary.splice(index, 1);
+	generateCards();
 }
 
 // Clears the new book form
@@ -119,7 +124,7 @@ function clearNewBookForm() {
 	newBookNotRead.value = ''; 
 }
 
-// Generate book cards at start if they exist
+// Generate book cards at start if there are books in myLibrary
 if (myLibrary.length > 0) {
 	generateCards();
 }
