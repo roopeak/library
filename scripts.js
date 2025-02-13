@@ -85,22 +85,26 @@ function generateCards() {
 		}
 
 		const bookCard = document.createElement('div');
+		bookCard.dataset.index = i;
 		bookCard.classList.add('book-card');
 		booksContainer.appendChild(bookCard);
 		const bookTitle = document.createElement('h3');
 		const bookAuthor = document.createElement('p');
 		const bookPages = document.createElement('p');
 		const bookRead = document.createElement('button');
+		const removeBook = document.createElement('button');
 		
 		bookCard.appendChild(bookTitle);
 		bookCard.appendChild(bookAuthor);
 		bookCard.appendChild(bookPages);
 		bookCard.appendChild(bookRead);
+		bookCard.appendChild(removeBook);
 	
 		bookTitle.textContent += myLibrary[i].title;
 		bookAuthor.textContent += myLibrary[i].author;
 		bookPages.textContent += myLibrary[i].pages;
 		bookRead.textContent += myLibrary[i].read;
+		removeBook.textContent = 'Remove book';
 	}
 	
 	bookCardsGenerated = true;

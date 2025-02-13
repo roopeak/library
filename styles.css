@@ -25,6 +25,8 @@ header {
 }
 
 .book-card {
+	display: flex;
+	flex-direction: column;
 	padding: 100px;
 	border: none;
 	background-color: blanchedalmond;
