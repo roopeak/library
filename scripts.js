@@ -106,12 +106,35 @@ function generateCards() {
 		removeBook.addEventListener('click', () => {
 			removeBookFromLibrary(i);
 		})
+
+		// Add event listener to bookRead button
+		bookRead.addEventListener('click', () => {
+			if (bookRead.textContent === 'Read') {
+				bookRead.textContent = 'Not read';
+			} else {
+				bookRead.textContent = 'Read';
+			}
+
+			toggleReadStatus(i);
+		})
 	}
+	console.log(myLibrary);
 }
 
 // Removes a book
 function removeBookFromLibrary(index) {
 	myLibrary.splice(index, 1);
+	generateCards();
+}
+
+// Change book read status
+function toggleReadStatus(index) {
+	if (myLibrary[index].read === 'Read') {
+		myLibrary[index].read = 'Not read';
+	} else {
+		myLibrary[index].read = 'Read';
+	}
+
 	generateCards();
 }
 
