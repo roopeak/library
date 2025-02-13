@@ -10,6 +10,9 @@ const newBookPages = document.getElementById('pages');
 const newBookRead = document.getElementById('read-radio')
 const newBookNotRead = document.getElementById('notread-radio');
 
+let bookCardsGenerated = false;
+
+// Event listeners to the new book form
 newBookBtn.addEventListener('click', () => {
 	dialog.showModal();
 });
@@ -28,7 +31,7 @@ submitBookBtn.addEventListener('click', (event) => {
 		}
 		
 		addBookToLibrary(title, author, pages, read);
-		clearForm();
+		clearNewBookForm();
 		event.preventDefault();
 		dialog.close();
 	}
@@ -59,6 +62,7 @@ const myLibrary = [
 	}
 ];
 
+// Book constructor
 function Book(title, author, pages, read) {
   this.title = title;
 	this.author = author;
@@ -66,14 +70,20 @@ function Book(title, author, pages, read) {
 	this.read = read;
 };
 
+// Adds a book to the library
 function addBookToLibrary(title, author, pages, read) {
 	const book = new Book(title, author, pages, read);
 	myLibrary.push(book);
 	generateCards();
 };
 
-function generateCards() {	
+// Generates book cards
+function generateCards() {
 	for (let i = 0; i < myLibrary.length; i++) {
+		if (bookCardsGenerated === true) {
+			i = myLibrary.length - 1;
+		}
+
 		const bookCard = document.createElement('div');
 		bookCard.classList.add('book-card');
 		booksContainer.appendChild(bookCard);
@@ -92,12 +102,20 @@ function generateCards() {
 		bookPages.textContent += myLibrary[i].pages;
 		bookRead.textContent += myLibrary[i].read;
 	}
+	
+	bookCardsGenerated = true;
 }
 
-function clearForm() {
+// Clears the new book form
+function clearNewBookForm() {
 	newBookTitle.value = '';
 	newBookAuthor.value = '';
 	newBookPages.value = '';
 	newBookRead.value = '';
 	newBookNotRead.value = ''; 
+}
+
+// Generate book cards at start if they exist
+if (myLibrary.length > 0) {
+	generateCards();
 }
