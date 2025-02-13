@@ -118,19 +118,22 @@ function generateCards() {
 	for (let i = 0; i < myLibrary.length; i++) {
 		const bookCard = document.createElement('div');
 		bookCard.classList.add('book-card');
-		booksContainer.appendChild(bookCard);
 
 		const bookTitle = document.createElement('h3');
 		const bookAuthor = document.createElement('p');
 		const bookPages = document.createElement('p');
+		const bookCardButtons = document.createElement('div');
+		bookCardButtons.classList.add('book-card-buttons');
 		const bookRead = document.createElement('button');
 		const removeBook = document.createElement('button');
 		
+		booksContainer.appendChild(bookCard);
 		bookCard.appendChild(bookTitle);
 		bookCard.appendChild(bookAuthor);
 		bookCard.appendChild(bookPages);
-		bookCard.appendChild(bookRead);
-		bookCard.appendChild(removeBook);
+		bookCardButtons.appendChild(bookRead);
+		bookCardButtons.appendChild(removeBook);
+		bookCard.appendChild(bookCardButtons);
 	
 		bookTitle.textContent += myLibrary[i].title;
 		bookAuthor.textContent += myLibrary[i].author;

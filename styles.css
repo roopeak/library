@@ -35,3 +35,9 @@ header {
 	background-color: blanchedalmond;
 	text-align: center;
 }
+
+.book-card-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
