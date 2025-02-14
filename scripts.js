@@ -197,20 +197,4 @@ class Book {
 		this.pages = pages;
 		this.read = read;
 	}
-
-	get title() {
-		return this._title;
-	}
-
-	get author() {
-		return this._author;
-	}
-
-	get pages() {
-		return this._pages;
-	}
-
-	get read() {
-		return this._read;
-	}
 }
