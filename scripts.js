@@ -1,191 +1,104 @@
-const dialog = document.querySelector('dialog');
-const booksContainer = document.querySelector('.books-container');
-const newBookBtn = document.querySelector('.new-book-btn');
-const cancelNewBookButton = document.querySelector('dialog button');
-const submitBookBtn = document.getElementById('submit-book');
+class Book {
+	constructor(title, author, pages, read) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+	}
+}
 
-const newBookTitle = document.getElementById('title');
-const newBookAuthor = document.getElementById('author');
-const newBookPages = document.getElementById('pages');
-const newBookRead = document.getElementById('read-radio')
-const newBookNotRead = document.getElementById('notread-radio');
+class Library {
+	constructor() {
+		this.books = [];
+		this.booksContainer = document.querySelector('.books-container');
+		this.dialog = document.querySelector('dialog');
+		this.newBookBtn = document.querySelector('.new-book-btn');
+		this.cancelNewBookButton = document.querySelector('dialog button');
+		this.submitBookBtn = document.getElementById('submit-book');
+		this.newBookTitle = document.getElementById('title');
+		this.newBookAuthor = document.getElementById('author');
+		this.newBookPages = document.getElementById('pages');
+		this.newBookRead = document.getElementById('read-radio');
+		this.newBookNotRead = document.getElementById('notread-radio');
 
-// Event listeners to the new book form
-newBookBtn.addEventListener('click', () => {
-	dialog.showModal();
-});
+		this.init();
+	}
 
-submitBookBtn.addEventListener('click', (event) => {
-	const title = newBookTitle.value;
-	const author = newBookAuthor.value;
-	const pages = newBookPages.value;
-	let read;
+	init() {
+		// Event Listeners
+		this.newBookBtn.addEventListener('click', () => this.dialog.showModal());
+		this.cancelNewBookButton.addEventListener('click', () => this.dialog.close());
+		this.submitBookBtn.addEventListener('click', (event) => this.addBook(event));
 
-	if (title != '' && author != '' && pages != '') {
-		if (newBookRead.checked) {
-			read = 'Read';
-		} else {
-			read = 'Not read';
-		}
-		
-		addBookToLibrary(title, author, pages, read);
-		clearNewBookForm();
+		// Sample books to display initially
+		this.books = [
+			new Book('The Hobbit', 'J.R.R. Tolkien', 320, 'Read'),
+			new Book('1984', 'George Orwell', 328, 'Not read'),
+			new Book('Old Man and the Sea', 'Ernest Hemingway', 112, 'Read')
+		];
+
+		this.renderBooks();
+	}
+
+	addBook(event) {
 		event.preventDefault();
-		dialog.close();
+
+		const title = this.newBookTitle.value;
+		const author = this.newBookAuthor.value;
+		const pages = this.newBookPages.value;
+		const read = this.newBookRead.checked ? 'Read' : 'Not read';
+
+		if (title && author && pages) {
+			this.books.push(new Book(title, author, pages, read));
+			this.clearNewBookForm();
+			this.dialog.close();
+			this.renderBooks();
+		}
 	}
-})
 
-cancelNewBookButton.addEventListener('click', () => {
-	dialog.close();
-})
+	removeBook(index) {
+		this.books.splice(index, 1);
+		this.renderBooks();
+	}
 
-const myLibrary = [
-	{
-		title: 'The Hobbit',
-		author: 'J.R.R. Tolkien',
-		pages: 320,
-		read: 'Read'
-	},
-	{
-		title: '1984',
-		author: 'George Orwell',
-		pages: 328,
-		read: 'Not read'
-	},
-	{
-		title: 'Old Man and the Sea',
-		author: 'Ernest Hemingway',
-		pages: 112,
-		read: 'Read'
-	},
-	{
-		title: 'The Hobbit',
-		author: 'J.R.R. Tolkien',
-		pages: 320,
-		read: 'Read'
-	},
-	{
-		title: '1984',
-		author: 'George Orwell',
-		pages: 328,
-		read: 'Not read'
-	},
-	{
-		title: 'Old Man and the Sea',
-		author: 'Ernest Hemingway',
-		pages: 112,
-		read: 'Read'
-	},
-	{
-		title: 'The Hobbit',
-		author: 'J.R.R. Tolkien',
-		pages: 320,
-		read: 'Read'
-	},
-	{
-		title: '1984',
-		author: 'George Orwell',
-		pages: 328,
-		read: 'Not read'
-	},
-	{
-		title: 'Old Man and the Sea',
-		author: 'Ernest Hemingway',
-		pages: 112,
-		read: 'Read'
-	},
-];
+	toggleReadStatus(index) {
+		this.books[index].read = this.books[index].read === 'Read' ? 'Not read' : 'Read';
+		this.renderBooks();
+	}
 
-// Book constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-};
+	renderBooks() {
+		this.booksContainer.innerHTML = '';
 
-// Adds a book to the library
-function addBookToLibrary(title, author, pages, read) {
-	const book = new Book(title, author, pages, read);
-	myLibrary.push(book);
-	generateCards();
-};
+		this.books.forEach((book, index) => {
+			const bookCard = document.createElement('div');
+			bookCard.classList.add('book-card');
 
-// Generates book cards
-function generateCards() {
-	booksContainer.innerHTML = '';
+			bookCard.innerHTML = `
+				<h3>${book.title}</h3>
+				<p>${book.author}</p>
+				<p>${book.pages} pages</p>
+				<div class="book-card-buttons">
+					<button class="toggle-read">${book.read}</button>
+					<button class="remove-book">Remove</button>
+				</div>
+			`;
 
-	for (let i = 0; i < myLibrary.length; i++) {
-		const bookCard = document.createElement('div');
-		bookCard.classList.add('book-card');
+			this.booksContainer.appendChild(bookCard);
 
-		const bookTitle = document.createElement('h3');
-		const bookAuthor = document.createElement('p');
-		const bookPages = document.createElement('p');
-		const bookCardButtons = document.createElement('div');
-		bookCardButtons.classList.add('book-card-buttons');
-		const bookRead = document.createElement('button');
-		const removeBook = document.createElement('button');
-		
-		booksContainer.appendChild(bookCard);
-		bookCard.appendChild(bookTitle);
-		bookCard.appendChild(bookAuthor);
-		bookCard.appendChild(bookPages);
-		bookCardButtons.appendChild(bookRead);
-		bookCardButtons.appendChild(removeBook);
-		bookCard.appendChild(bookCardButtons);
-	
-		bookTitle.textContent += myLibrary[i].title;
-		bookAuthor.textContent += myLibrary[i].author;
-		bookPages.textContent += myLibrary[i].pages;
-		bookRead.textContent += myLibrary[i].read;
-		removeBook.textContent = 'Remove book';
+			// Add event listeners to buttons
+			bookCard.querySelector('.remove-book').addEventListener('click', () => this.removeBook(index));
+			bookCard.querySelector('.toggle-read').addEventListener('click', () => this.toggleReadStatus(index));
+		});
+	}
 
-		// Add event listener to removeBook button
-		removeBook.addEventListener('click', () => {
-			removeBookFromLibrary(i);
-		})
-
-		// Add event listener to bookRead button
-		bookRead.addEventListener('click', () => {
-			if (bookRead.textContent === 'Read') {
-				bookRead.textContent = 'Not read';
-			} else {
-				bookRead.textContent = 'Read';
-			}
-
-			toggleReadStatus(i);
-		})
+	clearNewBookForm() {
+		this.newBookTitle.value = '';
+		this.newBookAuthor.value = '';
+		this.newBookPages.value = '';
+		this.newBookRead.checked = false;
+		this.newBookNotRead.checked = false;
 	}
 }
 
-// Removes a book
-function removeBookFromLibrary(index) {
-	myLibrary.splice(index, 1);
-	generateCards();
-}
-
-// Change book read status
-function toggleReadStatus(index) {
-	if (myLibrary[index].read === 'Read') {
-		myLibrary[index].read = 'Not read';
-	} else {
-		myLibrary[index].read = 'Read';
-	}
-
-	generateCards();
-}
-
-// Clears the new book form
-function clearNewBookForm() {
-	newBookTitle.value = '';
-	newBookAuthor.value = '';
-	newBookPages.value = '';
-	newBookRead.value = '';
-	newBookNotRead.value = ''; 
-}
-
-// Generate book cards at start if there are books in myLibrary
-if (myLibrary.length > 0) {
-	generateCards();
-}
+// Initialize the Library
+const myLibrary = new Library();
